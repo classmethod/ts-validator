@@ -1,2 +1,2 @@
-export * from './checkable';
 export * from './validators';
+export * from './validator-factory';
