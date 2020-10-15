@@ -12,8 +12,10 @@ Validate individual values
 ---
 
 ```ts
+import * as tv from '@cm-madlabs/ts-validator';
+
 const age = '22a';
-const result = ValidatorFactory.numberFormatValidator(
+const result = tv.ValidatorFactory.numberFormatValidator(
     'age',
     age,
     1,
