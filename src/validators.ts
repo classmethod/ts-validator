@@ -48,7 +48,7 @@ export class ValidatorFactory {
      * @param maxLength
      * @param format
      */
-    private static formatValidator(
+    public static formatValidator(
         name: string,
         value: string,
         minLength: number,
