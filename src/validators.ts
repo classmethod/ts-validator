@@ -3,14 +3,14 @@ import { DateTime } from 'luxon';
 export type ValidationResult = {
     isValid: boolean;
     report: Report;
-}
+};
 
-export type Report   = {
+export type Report = {
     rawValue: string;
     attribute: string;
     expected: string;
     actual: string;
-}
+};
 
 export interface Validators {
     validate(): ValidationResult;
@@ -26,6 +26,9 @@ export class ValidatorFactory {
     static readonly UUIDv4RegExp = new RegExp(
         '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}',
     );
+
+    // CloudFormation Stack Name regex
+    static readonly CfnStackNameRegExp = new RegExp('^[A-Za-z][A-Za-z0-9-]*$');
 
     /**
      * 数字
@@ -319,7 +322,7 @@ export class LiteralTypeCheckValidator implements Validators {
         };
 
         let isValid = false;
-        this.literalTypes.forEach(l => {
+        this.literalTypes.forEach((l) => {
             if (this.value === l) {
                 isValid = true;
             }
