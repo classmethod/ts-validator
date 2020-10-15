@@ -1,0 +1,36 @@
+{
+  "name": "@madlab/ts-validator",
+  "version": "0.0.1",
+  "description": "true/false generic validator",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "waddy",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest",
+    "lint": "eslint './{lib,src,test}/**/*.{ts,tsx}'",
+    "lint-fix": "eslint --fix './{lib,src,test}/**/*.{ts,tsx}'",
+    "lint-staged": "lint-staged",
+    "clean": "shx rm -rf ./dist && shx rm -rf './{src}/**/*.js' && shx rm -rf './{src}/**/*.d.ts'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn run lint-fix",
+      "yarn run lint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "luxon": "^1.25.0"
+  },
+  "devDependencies": {
+    "@types/luxon": "^1.25.0"
+  }
+}
