@@ -142,10 +142,11 @@ if (invalids.length) {
 Advanced: Create your own validator
 ---
 
-You can define your own validator and factory. If our repository validator make sense, your task is only to define composite factory.
+You can define your own validator and factory.
 
 ### 1. Define factory 
-
+ 
+If our repository validator make sense, your task is only to define composite factory.
 For example, length `5` or `7` postal code validator:
 
 ```ts
@@ -176,7 +177,7 @@ export function postalCodeValidator(value: string): Validator {
 
 ### 2. Define validator
 
-You can also define your own Validator:
+Otherwise, you can also define your own Validator:
 
 ```ts
 export class SjisZenkakuValidator implements Validator {
