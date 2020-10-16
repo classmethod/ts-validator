@@ -1,3 +1,5 @@
+![publish to npm registry](https://github.com/cm-madlabs/ts-validator/workflows/publish%20to%20npm%20registry/badge.svg)
+
 ![](coverage/badge-branches.svg)
 ![](coverage/badge-functions.svg)
 ![](coverage/badge-lines.svg)
