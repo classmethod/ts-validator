@@ -5,7 +5,7 @@ Validate your value.
 
 ### How to use
 
-* Basic usage: validate individual values by factory
+* Basic usage: validate individual values using factory
 * Application: Create checkable interface, for example
 * Advanced: Create your own validator (and PR!)
 
@@ -17,7 +17,7 @@ yarn add @cm-madlabs/ts-validator
 ```
 
 
-Validate individual values by factory
+Validate individual values using factory
 ---
 
 `Factory` is utility function-kit to validate your value.  
@@ -47,7 +47,7 @@ if (!result.isValid) {
 
 ```
 
-Application usage
+In application usage
 ---
 
 In your application, we recommend you to define a validatable domain object  -- embedding this validators.
