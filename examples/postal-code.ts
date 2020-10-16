@@ -4,7 +4,7 @@ import {
     MinLengthValidator,
     OrCompositeValidator,
     Validator,
-} from '../src';
+} from '../src/index';
 
 export function postalCodeValidator(value: string): Validator {
     const key = 'postal_code';

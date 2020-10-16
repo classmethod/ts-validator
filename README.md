@@ -54,14 +54,14 @@ In your application, we recommend you to define a validatable domain object  -- 
 
 examples/user-domain.ts
 ```ts
-import * as v from '../src/index';
-import { Validators } from '../src';
-import { ValidationResult } from '../src';
+import * as v from '@cm-madlabs/ts-validator';
+import { Validator } from '@cm-madlabs/ts-validator';
+import { ValidationResult } from '@cm-madlabs/ts-validator';
 
 export abstract class Checkable {
-    readonly validator: v.Validators;
+    readonly validator: v.Validator;
 
-    protected constructor(validator: Validators) {
+    protected constructor(validator: Validator) {
         this.validator = validator;
     }
 
@@ -134,23 +134,93 @@ if (invalids.length) {
     // do your stuff
     console.log('do your stuff');
 }
-```
 
+```
 `yarn ts-node examples/user-domain.ts` will raise exception.
 
 
 Advanced: Create your own validator
 ---
 
-You can define your own validator and factory. If our repository validator make sense, your task is only to define composite factory. For example, length `5` or `7` postal code validator:
+You can define your own validator and factory. If our repository validator make sense, your task is only to define composite factory.
+
+### 1. Define factory 
+
+For example, length `5` or `7` postal code validator:
 
 ```ts
+import {
+    CompositeValidator,
+    MaxLengthValidator,
+    MinLengthValidator,
+    OrCompositeValidator,
+    Validator,
+} from '@cm-madlabs/ts-validator';
 
-export function postalCodeValidator(value:string): Validators {}
+export function postalCodeValidator(value: string): Validator {
+    const key = 'postal_code';
+    const minFive = new MinLengthValidator(key, value, 5);
+    const maxFive = new MaxLengthValidator(key, value, 5);
 
+    const minSeven = new MinLengthValidator(key, value, 7);
+    const maxSeven = new MaxLengthValidator(key, value, 7);
 
+    const five = new CompositeValidator(minFive, maxFive);
+    const seven = new CompositeValidator(minSeven, maxSeven);
 
+    return new OrCompositeValidator(five, seven);
+}
 ``` 
 
 
 
+### 2. Define validator
+
+You can also define your own Validator:
+
+```ts
+export class SjisZenkakuValidator implements Validator {
+    readonly name: string;
+    readonly value: string;
+    readonly patternSjis: RegExp = new RegExp('^[81-9f|e0-fc]+$');
+
+    constructor(name: string, value: string) {
+        this.name = name;
+        this.value = value;
+    }
+
+    validate(): ValidationResult {
+        const pattern = this.patternSjis;
+
+        function check(v: string): boolean {
+            
+            const buffer = Buffer.from(v);
+            const sjisBytes = encoding.convert(buffer, 'SJIS');
+
+            // bytes
+            const byteLength = sjisBytes.length;
+
+            // get first
+            const leftByte = (sjisBytes[0] & 0xff).toString(16);
+
+            // mulibytes && character is valid
+            return byteLength === 2 && pattern.test(leftByte);
+        }
+
+        const isValid = this.value
+            .split('')
+            .map(check)
+            .reduce((pre, cur) => pre && cur, true);
+
+        return {
+            isValid,
+            report: {
+                attribute: this.name,
+                rawValue: this.value,
+                expected: `sjis pattern: ${this.patternSjis}`,
+                actual: this.value,
+            },
+        };
+    }
+}
+```
