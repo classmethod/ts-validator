@@ -1,0 +1,25 @@
+name: publish to npm registry
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+jobs:
+    publish:
+        name: publish to npm registry
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout
+              uses: actions/checkout@v2
+            - name: set up Node environment for npm
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+                  registry-url: https://registry.npmjs.org/
+            - name: install dependencies
+              run: yarn install
+            - name: build
+              run: yarn build
+            - name: publish to npm registry
+              run: npm publish --access public --scope=cm-madlabs
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
