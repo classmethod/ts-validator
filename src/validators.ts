@@ -17,7 +17,7 @@ export interface Validators {
 }
 
 /**
- * not ( undefined, null, '') バリデーター
+ * not ( undefined, null, '')
  */
 export class NotEmptyValidator implements Validators {
     readonly name: string;
@@ -49,7 +49,7 @@ export class NotEmptyValidator implements Validators {
 }
 
 /**
- * 正規表現バリデーター
+ * regexp.pattern.test(value)
  */
 export class RegExpValidator implements Validators {
     readonly name: string;
@@ -80,7 +80,7 @@ export class RegExpValidator implements Validators {
 }
 
 /**
- * リテラル型のチェックバリデーター
+ * literalTypes array
  */
 export class LiteralTypeCheckValidator implements Validators {
     readonly name: string;
@@ -116,7 +116,49 @@ export class LiteralTypeCheckValidator implements Validators {
 }
 
 /**
- * ISO日付チェックバリデータ
+ * valid datetime
+ */
+export class DateTimeValidator implements Validators {
+    readonly name: string;
+    readonly value: string;
+    readonly dateFormat: string;
+
+    constructor(name: string, value: string, dateFormat: string) {
+        this.name = name;
+        this.value = value;
+        this.dateFormat = dateFormat;
+    }
+
+    validate(): ValidationResult {
+        const report: Report = {
+            rawValue: this.value,
+            attribute: this.name,
+            expected: `dateFormat: ${this.dateFormat}`,
+            actual: this.value,
+        };
+        let dateTime;
+        if (this.value !== undefined && this.value !== null) {
+            dateTime = DateTimeValidator.getDateTime(
+                this.value,
+                this.dateFormat,
+            );
+        }
+
+        const isValid =
+            dateTime !== undefined && dateTime !== null && dateTime.isValid;
+
+        return {
+            isValid,
+            report,
+        };
+    }
+    private static getDateTime(value: string, dateFormat: string): DateTime {
+        return DateTime.fromFormat(value, dateFormat);
+    }
+}
+
+/**
+ * ISO datetime
  */
 export class ISODateTimeValidator implements Validators {
     readonly name: string;
@@ -152,7 +194,7 @@ export class ISODateTimeValidator implements Validators {
 }
 
 /**
- * 最小Lengthチェックバリデーター
+ * min length
  */
 export class MinLengthValidator implements Validators {
     readonly name: string;
@@ -191,7 +233,7 @@ export class MinLengthValidator implements Validators {
 }
 
 /**
- * 最大Lengthチェックバリデータ
+ * max length
  */
 export class MaxLengthValidator implements Validators {
     readonly name: string;
@@ -230,7 +272,7 @@ export class MaxLengthValidator implements Validators {
 }
 
 /**
- * 数値幅のValidator
+ * number
  */
 export class NumberRangeValidator implements Validators {
     readonly name: string;
@@ -266,7 +308,7 @@ export class NumberRangeValidator implements Validators {
 }
 
 /**
- * マスタに含まれているかどうかチェック
+ * includes
  */
 export class ContainsValidator implements Validators {
     readonly name: string;
@@ -299,13 +341,13 @@ export class ContainsValidator implements Validators {
 }
 
 /**
- * 複数のValidatorを組み合わせるValidator
+ *  multiple Validator and composite
  */
 export class CompositeValidator implements Validators {
     readonly validators: Validators[];
 
-    constructor(...validators: Validators[]) {
-        this.validators = validators;
+    constructor(...validators: (Validators | undefined)[]) {
+        this.validators = validators.filter(Boolean) as Validators[];
     }
 
     validate(): ValidationResult {
@@ -335,7 +377,7 @@ export class CompositeValidator implements Validators {
 }
 
 /**
- * 複数のValidatorを受け取り、いずれかを満たしていればよしとするValidator
+ * multiple Validator or composite
  */
 export class OrCompositeValidator implements Validators {
     readonly validators: Validators[];
@@ -365,14 +407,8 @@ export class OrCompositeValidator implements Validators {
             ): ValidationResult => {
                 const thisResult = validator.validate();
 
-                //レポート
-                // 全体がtrueになっていれば記録しない
-                // 全体がfalseかつこのレポートがfalseだったら記録する
                 return {
-                    // いずれかがパスしていたら全体がOKになる
                     isValid: previousResult.isValid || thisResult.isValid,
-
-                    // 最後のfalseを記録
                     report:
                         !previousResult.isValid && !thisResult.isValid
                             ? thisResult.report

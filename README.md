@@ -5,17 +5,26 @@ Validate your value.
 
 ### How to use
 
-* Basic usage: validate individual values.
+* Basic usage: validate individual values by factory
+* Application: Create checkable interface, for example
+* Advanced: Create your own validator (and PR!)
 
 
-Validate individual values
+### install
+
+```
+yarn add @cm-madlabs/ts-validator
+```
+
+
+Validate individual values by factory
 ---
 
 ```ts
 import * as tv from '@cm-madlabs/ts-validator';
 
 const age = '22a';
-const result = tv.ValidatorFactory.numberFormatValidator(
+const result = tv.Factory.numberFormatValidator(
     'age',
     age,
     1,
