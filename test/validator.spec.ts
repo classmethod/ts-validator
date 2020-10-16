@@ -5,7 +5,7 @@ import {
     MinLengthValidator,
     NotEmptyValidator,
     RegExpValidator,
-} from '../src/validators';
+} from '../src/validator';
 import {
     AlphanumericLowerReqExp,
     AlphanumericReqExp,

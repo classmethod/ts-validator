@@ -9,8 +9,8 @@ import {
     NumberRangeValidator,
     OrCompositeValidator,
     RegExpValidator,
-    Validators,
-} from './validators';
+    Validator,
+} from './validator';
 import * as regexp from './regexp';
 
 /**
@@ -33,7 +33,7 @@ export function formatValidator({
     minLength?: number;
     maxLength?: number;
     format?: RegExp;
-}): Validators {
+}): Validator {
     const required = new NotEmptyValidator(name, value);
     const min = minLength
         ? new MinLengthValidator(name, value, minLength)
@@ -43,19 +43,20 @@ export function formatValidator({
         : undefined;
     const f = format ? new RegExpValidator(name, value, format) : undefined;
     return new CompositeValidator(required, min, max, f);
+    1;
 }
 
 /**
  * NotEmpty
  */
-export function notEmptyValidator(name: string, value: string): Validators {
+export function notEmptyValidator(name: string, value: string): Validator {
     return new NotEmptyValidator(name, value);
 }
 
 /**
  * NotEmpty && UUIDv4
  */
-export function uuidV4CheckValidator(name: string, value: string): Validators {
+export function uuidV4CheckValidator(name: string, value: string): Validator {
     const required = new NotEmptyValidator(name, value);
     const r = new RegExpValidator(name, value, regexp.UUIDv4RegExp);
     return new CompositeValidator(required, r);
@@ -69,7 +70,7 @@ export function numberRangeValidator(
     value: string,
     min: number,
     max: number,
-): Validators {
+): Validator {
     const required = new NotEmptyValidator(name, value);
     const f = new RegExpValidator(name, value, regexp.NumberRegExp);
     const range = new NumberRangeValidator(name, Number(value), min, max);
@@ -84,7 +85,7 @@ export function lengthValidator(
     value: string,
     minLength: number,
     maxLength: number,
-): Validators {
+): Validator {
     const notEmpty = new NotEmptyValidator(name, value);
     const min = new MinLengthValidator(name, value, minLength);
     const max = new MaxLengthValidator(name, value, maxLength);
@@ -98,7 +99,7 @@ export function containsValidator(
     name: string,
     value: string,
     master: string[],
-): Validators {
+): Validator {
     const notNull = new NotEmptyValidator(name, value);
     const contains = new ContainsValidator(name, value, master);
     return new CompositeValidator(notNull, contains);
@@ -111,14 +112,14 @@ export function literalCheckValidator(
     name: string,
     value: string,
     ...literalTypes: string[]
-): Validators {
+): Validator {
     return new LiteralTypeCheckValidator(name, value, ...literalTypes);
 }
 
 /**
  * ISODateTimeValidator
  */
-export function isoDateValidator(name: string, value: string): Validators {
+export function isoDateValidator(name: string, value: string): Validator {
     return new ISODateTimeValidator(name, value);
 }
 
@@ -130,7 +131,7 @@ export function alphanumericValidator(
     value: string,
     minLength: number,
     maxLength: number,
-): Validators {
+): Validator {
     return formatValidator({
         name,
         value,
@@ -148,7 +149,7 @@ export function numberFormatValidator(
     value: string,
     minLength: number,
     maxLength: number,
-): Validators {
+): Validator {
     return formatValidator({
         name,
         value,
@@ -161,20 +162,20 @@ export function numberFormatValidator(
 /**
  * empty string ''
  */
-export function emptyStringValidator(name: string, value: string): Validators {
+export function emptyStringValidator(name: string, value: string): Validator {
     return literalCheckValidator(name, value, '');
 }
 
 /**
  * and
  */
-export function and(...validators: Validators[]): Validators {
+export function and(...validators: Validator[]): Validator {
     return new CompositeValidator(...validators);
 }
 
 /**
  * or
  */
-export function or(...validators: Validators[]): Validators {
+export function or(...validators: Validator[]): Validator {
     return new OrCompositeValidator(...validators);
 }

@@ -1,3 +1,3 @@
-export * as Validators from './validators';
+export * from './validator';
 export * as Factory from './validator-factory';
 export * as Regexp from './regexp';

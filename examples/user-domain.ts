@@ -1,67 +1,11 @@
-TypeScript validator
----
-
-Validate your value.
-
-### How to use
-
-* Basic usage: validate individual values by factory
-* Application: Create checkable interface, for example
-* Advanced: Create your own validator (and PR!)
-
-
-### install
-
-```
-yarn add @cm-madlabs/ts-validator
-```
-
-
-Validate individual values by factory
----
-
-`Factory` is utility function-kit to validate your value.  
-
-```ts
-import * as tv from '@cm-madlabs/ts-validator';
-
-const age = '22a';
-const result = tv.Factory.numberFormatValidator(
-    'age',
-    age,
-    1,
-    3,
-).validate();
-
-console.log(JSON.stringify(result));
-// {"isValid":false,"report":{"rawValue":"22a","attribute":"age","expected":"pattern: /^[0-9]+$/","actual":"22a"}}
-
-
-// We can applicate to throw error, for example.
-if (!result.isValid) {
-    throw new Error(JSON.stringify(result.report));
-}
-// Error: {"rawValue":"22a","attribute":"age","expected":"pattern: /^[0-9]+$/","actual":"22a"}
-//       at Object.<anonymous>
-
-
-```
-
-Application usage
----
-
-In your application, we recommend you to define a validatable domain object  -- embedding this validators.
-
-examples/user-domain.ts
-```ts
 import * as v from '../src/index';
-import { Validators } from '../src';
+import { Validator } from '../src';
 import { ValidationResult } from '../src';
 
 export abstract class Checkable {
-    readonly validator: v.Validators;
+    readonly validator: v.Validator;
 
-    protected constructor(validator: Validators) {
+    protected constructor(validator: Validator) {
         this.validator = validator;
     }
 
@@ -134,23 +78,3 @@ if (invalids.length) {
     // do your stuff
     console.log('do your stuff');
 }
-```
-
-`yarn ts-node examples/user-domain.ts` will raise exception.
-
-
-Advanced: Create your own validator
----
-
-You can define your own validator and factory. If our repository validator make sense, your task is only to define composite factory. For example, length `5` or `7` postal code validator:
-
-```ts
-
-export function postalCodeValidator(value:string): Validators {}
-
-
-
-``` 
-
-
-

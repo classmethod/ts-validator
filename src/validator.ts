@@ -12,14 +12,14 @@ export type Report = {
     actual: string;
 };
 
-export interface Validators {
+export interface Validator {
     validate(): ValidationResult;
 }
 
 /**
  * not ( undefined, null, '')
  */
-export class NotEmptyValidator implements Validators {
+export class NotEmptyValidator implements Validator {
     readonly name: string;
     readonly value: string;
 
@@ -51,7 +51,7 @@ export class NotEmptyValidator implements Validators {
 /**
  * regexp.pattern.test(value)
  */
-export class RegExpValidator implements Validators {
+export class RegExpValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly pattern: RegExp;
@@ -82,7 +82,7 @@ export class RegExpValidator implements Validators {
 /**
  * literalTypes array
  */
-export class LiteralTypeCheckValidator implements Validators {
+export class LiteralTypeCheckValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly literalTypes: string[];
@@ -118,7 +118,7 @@ export class LiteralTypeCheckValidator implements Validators {
 /**
  * valid datetime
  */
-export class DateTimeValidator implements Validators {
+export class DateTimeValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly dateFormat: string;
@@ -160,7 +160,7 @@ export class DateTimeValidator implements Validators {
 /**
  * ISO datetime
  */
-export class ISODateTimeValidator implements Validators {
+export class ISODateTimeValidator implements Validator {
     readonly name: string;
     readonly value: string;
 
@@ -196,7 +196,7 @@ export class ISODateTimeValidator implements Validators {
 /**
  * min length
  */
-export class MinLengthValidator implements Validators {
+export class MinLengthValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly minLength: number;
@@ -235,7 +235,7 @@ export class MinLengthValidator implements Validators {
 /**
  * max length
  */
-export class MaxLengthValidator implements Validators {
+export class MaxLengthValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly maxLength: number;
@@ -274,7 +274,7 @@ export class MaxLengthValidator implements Validators {
 /**
  * number
  */
-export class NumberRangeValidator implements Validators {
+export class NumberRangeValidator implements Validator {
     readonly name: string;
     readonly value: number;
     readonly min: number;
@@ -310,7 +310,7 @@ export class NumberRangeValidator implements Validators {
 /**
  * includes
  */
-export class ContainsValidator implements Validators {
+export class ContainsValidator implements Validator {
     readonly name: string;
     readonly value: string;
     readonly master: string[];
@@ -343,21 +343,21 @@ export class ContainsValidator implements Validators {
 /**
  *  multiple Validator and composite
  */
-export class CompositeValidator implements Validators {
-    readonly validators: Validators[];
+export class CompositeValidator implements Validator {
+    readonly validators: Validator[];
 
-    constructor(...validators: (Validators | undefined)[]) {
-        this.validators = validators.filter(Boolean) as Validators[];
+    constructor(...validators: (Validator | undefined)[]) {
+        this.validators = validators.filter(Boolean) as Validator[];
     }
 
     validate(): ValidationResult {
         let result: ValidationResult = {
             isValid: false,
             report: {
-                attribute: 'validators',
+                attribute: 'and',
                 rawValue: JSON.stringify(this.validators),
-                expected: 'at least one validator',
-                actual: String(this.validators.length),
+                expected: 'Pass all validator.',
+                actual: 'Passed all validator.',
             },
         };
         if (this.validators.length === 0) {
@@ -379,10 +379,10 @@ export class CompositeValidator implements Validators {
 /**
  * multiple Validator or composite
  */
-export class OrCompositeValidator implements Validators {
-    readonly validators: Validators[];
+export class OrCompositeValidator implements Validator {
+    readonly validators: Validator[];
 
-    constructor(...validators: Validators[]) {
+    constructor(...validators: Validator[]) {
         this.validators = validators;
     }
 
@@ -390,10 +390,10 @@ export class OrCompositeValidator implements Validators {
         const defaultResult: ValidationResult = {
             isValid: false,
             report: {
-                attribute: 'validators',
+                attribute: 'or',
                 rawValue: JSON.stringify(this.validators),
-                expected: 'at least one validator',
-                actual: String(this.validators.length),
+                expected: 'Pass at least one validator.',
+                actual: 'None of the validators passed.',
             },
         };
         if (this.validators.length === 0) {
@@ -401,18 +401,12 @@ export class OrCompositeValidator implements Validators {
         }
 
         return this.validators.reduce(
-            (
-                previousResult: ValidationResult,
-                validator: Validators,
-            ): ValidationResult => {
+            (acc: ValidationResult, validator: Validator): ValidationResult => {
                 const thisResult = validator.validate();
 
                 return {
-                    isValid: previousResult.isValid || thisResult.isValid,
-                    report:
-                        !previousResult.isValid && !thisResult.isValid
-                            ? thisResult.report
-                            : previousResult.report,
+                    isValid: acc.isValid || thisResult.isValid,
+                    report: thisResult.isValid ? thisResult.report : acc.report,
                 };
             },
             defaultResult,
