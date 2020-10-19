@@ -8,12 +8,13 @@ TypeScript validator
 
 Validate your value.
 
+- [API Reference](https://cm-madlabs.github.io/ts-validator/)
+
 ### How to use
 
 * Basic usage: validate individual values using factory
 * Application: Create checkable interface, for example
 * Advanced: Create your own validator (and PR!)
-
 
 ### install
 
