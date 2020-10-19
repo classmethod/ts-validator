@@ -29,5 +29,3 @@ jobs:
           yarn test:coverage
       - name: publish codecov
         run: yarn codecov -f coverage/*.json
-        env:
-          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
