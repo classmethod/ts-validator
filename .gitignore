@@ -69,3 +69,5 @@ deploy/*
 
 #idea
 .idea
+
+/docs
