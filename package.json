@@ -20,6 +20,7 @@
   "homepage": "https://github.com/team-mad/ts-validator#typescript-validator",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "build:doc": "typedoc",
     "test": "jest",
     "test:coverage": "yarn jest --coverage",
     "lint": "eslint './{lib,src,test}/**/*.{ts,tsx}'",
