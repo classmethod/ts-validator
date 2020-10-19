@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/%40cm-madlabs%2Fts-validator.svg)](https://badge.fury.io/js/%40cm-madlabs%2Fts-validator)
+[![codecov](https://codecov.io/gh/cm-madlabs/ts-validator/branch/main/graph/badge.svg?token=RKsaKLdRGP)](undefined)
 ![publish to npm registry](https://github.com/cm-madlabs/ts-validator/workflows/publish%20to%20npm%20registry/badge.svg)
 
 TypeScript validator
