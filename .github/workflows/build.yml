@@ -1,33 +1,33 @@
 name: build
 on:
-    push:
-        branches:
-            - main
-	pull_requests:
-		branches:
-			- main
+  push:
+    branches:
+      - main
+  pull_requests:
+    branches:
+      - main
 jobs:
-    build:
-        name: build
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout
-              uses: actions/checkout@v2
-            - name: set up Node environment for npm
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 12
-            - name: install dependencies
-              run: yarn install
-            - name: build
-              run: yarn build
-			- name: lint
-              run: 	yarn lint
-            - name: test
-              run: |
-              	yarn build
-              	yarn test:coverage
-            - name: publish codecov
-              run: codecov -f coverage/*.json
-              env:
-                  CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: set up Node environment for npm
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: install dependencies
+        run: yarn install
+      - name: build
+        run: yarn build
+      - name: lint
+        run: yarn lint
+      - name: test
+        run: |
+          yarn build
+          yarn test:coverage
+      - name: publish codecov
+        run: codecov -f coverage/*.json
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
