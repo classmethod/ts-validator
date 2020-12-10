@@ -107,31 +107,85 @@ describe('MaxLengthValidator', () => {
 
 describe('RegExpValidator', () => {
     test.each`
-        name              | value                     | pattern                       | expected
-        ${'address'}      | ${'Tokyo'}                | ${AlphanumericReqExp}         | ${{ isValid: true, actual: 'Tokyo' }}
-        ${'address'}      | ${''}                     | ${AlphanumericReqExp}         | ${{ isValid: true, actual: '' }}
-        ${'address'}      | ${'tokyo'}                | ${AlphanumericLowerReqExp}    | ${{ isValid: true, actual: 'tokyo' }}
-        ${'phone number'} | ${'0120123123'}           | ${NumberRegExp}               | ${{ isValid: true, actual: '0120123123' }}
-        ${'address'}      | ${'北海道'}               | ${Utf8ZenkakuAndReturnRegExp} | ${{ isValid: true, actual: '北海道' }}
-        ${'address'}      | ${'!#$%&123'}             | ${AsciiRegExp}                | ${{ isValid: true, actual: '!#$%&123' }}
-        ${'address'}      | ${'Tokyo&Hokkaido'}       | ${AlphanumericReqExp}         | ${{ isValid: false, actual: 'Tokyo&Hokkaido' }}
-        ${'address'}      | ${'東京'}                 | ${AlphanumericReqExp}         | ${{ isValid: false, actual: '東京' }}
-        ${'address'}      | ${'　'}                   | ${AlphanumericReqExp}         | ${{ isValid: false, actual: '　' }}
-        ${'address'}      | ${'Tokyo Hokkaido'}       | ${AlphanumericReqExp}         | ${{ isValid: false, actual: 'Tokyo Hokkaido' }}
-        ${'address'}      | ${'Tokyo'}                | ${AlphanumericLowerReqExp}    | ${{ isValid: false, actual: 'Tokyo' }}
-        ${'address'}      | ${'東京'}                 | ${AlphanumericLowerReqExp}    | ${{ isValid: false, actual: '東京' }}
-        ${'phone number'} | ${'０１２０１２３１２３'} | ${NumberRegExp}               | ${{ isValid: false, actual: '０１２０１２３１２３' }}
-        ${'phone number'} | ${'#0120123123#'}         | ${NumberRegExp}               | ${{ isValid: false, actual: '#0120123123#' }}
-        ${'phone number'} | ${'tokyo123'}             | ${NumberRegExp}               | ${{ isValid: false, actual: 'tokyo123' }}
-        ${'address'}      | ${'hokkaido'}             | ${Utf8ZenkakuAndReturnRegExp} | ${{ isValid: false, actual: 'hokkaido' }}
-        ${'address'}      | ${'hokkaido北海道'}       | ${Utf8ZenkakuAndReturnRegExp} | ${{ isValid: false, actual: 'hokkaido北海道' }}
-        ${'address'}      | ${' '}                    | ${Utf8ZenkakuAndReturnRegExp} | ${{ isValid: false, actual: ' ' }}
-        ${'address'}      | ${'!#$%&東京'}            | ${AsciiRegExp}                | ${{ isValid: false, actual: '!#$%&東京' }}
-        ${'address'}      | ${'！＃＄％＆'}           | ${AsciiRegExp}                | ${{ isValid: false, actual: '！＃＄％＆' }}
+        name         | value       | pattern                       | expected
+        ${'address'} | ${'Tokyo'} | ${AlphanumericReqExp} | ${{
+    isValid: true,
+    actual: 'Tokyo',
+}}
+        ${'address'} | ${''}       | ${AlphanumericReqExp}         | ${{ isValid: true, actual: '' }}
+        ${'address'} | ${'tokyo'} | ${AlphanumericLowerReqExp} | ${{
+    isValid: true,
+    actual: 'tokyo',
+}}
+        ${'phone number'} | ${'0120123123'} | ${NumberRegExp} | ${{
+    isValid: true,
+    actual: '0120123123',
+}}
+        ${'address'} | ${'北海道'} | ${Utf8ZenkakuAndReturnRegExp} | ${{ isValid: true, actual: '北海道' }}
+        ${'address'} | ${'!#$%&123'} | ${AsciiRegExp} | ${{
+    isValid: true,
+    actual: '!#$%&123',
+}}
+        ${'address'} | ${'Tokyo&Hokkaido'} | ${AlphanumericReqExp} | ${{
+    isValid: false,
+    actual: 'Tokyo&Hokkaido',
+}}
+        ${'address'} | ${'東京'} | ${AlphanumericReqExp} | ${{
+    isValid: false,
+    actual: '東京',
+}}
+        ${'address'} | ${'　'} | ${AlphanumericReqExp} | ${{
+    isValid: false,
+    actual: '　',
+}}
+        ${'address'} | ${'Tokyo Hokkaido'} | ${AlphanumericReqExp} | ${{
+    isValid: false,
+    actual: 'Tokyo Hokkaido',
+}}
+        ${'address'} | ${'Tokyo'} | ${AlphanumericLowerReqExp} | ${{
+    isValid: false,
+    actual: 'Tokyo',
+}}
+        ${'address'} | ${'東京'} | ${AlphanumericLowerReqExp} | ${{
+    isValid: false,
+    actual: '東京',
+}}
+        ${'phone number'} | ${'０１２０１２３１２３'} | ${NumberRegExp} | ${{
+    isValid: false,
+    actual: '０１２０１２３１２３',
+}}
+        ${'phone number'} | ${'#0120123123#'} | ${NumberRegExp} | ${{
+    isValid: false,
+    actual: '#0120123123#',
+}}
+        ${'phone number'} | ${'tokyo123'} | ${NumberRegExp} | ${{
+    isValid: false,
+    actual: 'tokyo123',
+}}
+        ${'address'} | ${'hokkaido'} | ${Utf8ZenkakuAndReturnRegExp} | ${{
+    isValid: false,
+    actual: 'hokkaido',
+}}
+        ${'address'} | ${'hokkaido北海道'} | ${Utf8ZenkakuAndReturnRegExp} | ${{
+    isValid: false,
+    actual: 'hokkaido北海道',
+}}
+        ${'address'} | ${' '} | ${Utf8ZenkakuAndReturnRegExp} | ${{
+    isValid: false,
+    actual: ' ',
+}}
+        ${'address'} | ${'!#$%&東京'} | ${AsciiRegExp} | ${{
+    isValid: false,
+    actual: '!#$%&東京',
+}}
+        ${'address'} | ${'！＃＄％＆'} | ${AsciiRegExp} | ${{
+    isValid: false,
+    actual: '！＃＄％＆',
+}}
     `(
         'input: $value expected: $expected.isValid',
         ({ name, value, pattern, expected }) => {
-            const suc = new RegExpValidator(name, value, pattern);
+            const suc = new RegExpValidator(name, pattern, value);
             expect(suc.validate()).toEqual({
                 isValid: expected.isValid,
                 report: {
@@ -148,13 +202,28 @@ describe('RegExpValidator', () => {
 describe('DateTimeValidator', () => {
     test.each`
         name          | value                             | dateFormat          | expected
-        ${'birthday'} | ${'202001311200'}                 | ${'yyyyMMddHHmm'}   | ${{ isValid: true, actual: '202001311200' }}
-        ${'birthday'} | ${'20200130120000'}               | ${'yyyyMMddHHmmss'} | ${{ isValid: true, actual: '20200130120000' }}
-        ${'birthday'} | ${'202001321200'}                 | ${'yyyyMMddHHmm'}   | ${{ isValid: false, actual: '202001321200' }}
-        ${'birthday'} | ${'202001301200'}                 | ${'yyyyMMddHHmmss'} | ${{ isValid: false, actual: '202001301200' }}
+        ${'birthday'} | ${'202001311200'} | ${'yyyyMMddHHmm'} | ${{
+    isValid: true,
+    actual: '202001311200',
+}}
+        ${'birthday'} | ${'20200130120000'} | ${'yyyyMMddHHmmss'} | ${{
+    isValid: true,
+    actual: '20200130120000',
+}}
+        ${'birthday'} | ${'202001321200'} | ${'yyyyMMddHHmm'} | ${{
+    isValid: false,
+    actual: '202001321200',
+}}
+        ${'birthday'} | ${'202001301200'} | ${'yyyyMMddHHmmss'} | ${{
+    isValid: false,
+    actual: '202001301200',
+}}
         ${'birthday'} | ${'２０２００１３０１２００'}     | ${'yyyyMMddHHmm'}   | ${{ isValid: false, actual: '２０２００１３０１２００' }}
         ${'birthday'} | ${'２０２００１３０１２００００'} | ${'yyyyMMddHHmmss'} | ${{ isValid: false, actual: '２０２００１３０１２００００' }}
-        ${'birthday'} | ${'2020０１３０12００'}           | ${'yyyyMMddHHmm'}   | ${{ isValid: false, actual: '2020０１３０12００' }}
+        ${'birthday'} | ${'2020０１３０12００'} | ${'yyyyMMddHHmm'} | ${{
+    isValid: false,
+    actual: '2020０１３０12００',
+}}
         ${'birthday'} | ${''}                             | ${'yyyyMMddHHmm'}   | ${{ isValid: false, actual: '' }}
     `(
         'input: $value expected: $expected.isValid',

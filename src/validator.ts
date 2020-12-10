@@ -50,9 +50,9 @@ export class FalseValidator implements Validator {
  */
 export class NotEmptyValidator implements Validator {
     readonly name: string;
-    readonly value: string;
+    readonly value?: string;
 
-    constructor(name: string, value: string) {
+    constructor(name: string, value?: string) {
         this.name = name;
         this.value = value;
     }
@@ -82,10 +82,10 @@ export class NotEmptyValidator implements Validator {
  */
 export class RegExpValidator implements Validator {
     readonly name: string;
-    readonly value: string;
+    readonly value?: string;
     readonly pattern: RegExp;
 
-    constructor(name: string, value: string, pattern: RegExp) {
+    constructor(name: string, pattern: RegExp, value?: string) {
         this.name = name;
         this.value = value;
         this.pattern = pattern;
@@ -93,13 +93,16 @@ export class RegExpValidator implements Validator {
 
     validate(): ValidationResult {
         const report: Report = {
-            rawValue: this.value,
+            rawValue: String(this.value),
             attribute: this.name,
             expected: `pattern: ${this.pattern}`,
-            actual: this.value,
+            actual: String(this.value),
         };
 
-        const isValid = this.pattern.test(this.value);
+        const isValid =
+            this.value !== undefined &&
+            this.value !== null &&
+            this.pattern.test(this.value);
 
         return {
             isValid,
