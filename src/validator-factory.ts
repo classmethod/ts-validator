@@ -42,7 +42,7 @@ export function formatValidator({
     const max = maxLength
         ? new MaxLengthValidator(name, value, maxLength)
         : undefined;
-    const f = format ? new RegExpValidator(name, value, format) : undefined;
+    const f = format ? new RegExpValidator(name, format, value) : undefined;
     return new CompositeValidator(required, min, max, f);
     1;
 }
@@ -50,16 +50,16 @@ export function formatValidator({
 /**
  * NotEmpty
  */
-export function notEmptyValidator(name: string, value: string): Validator {
+export function notEmptyValidator(name: string, value?: string): Validator {
     return new NotEmptyValidator(name, value);
 }
 
 /**
  * NotEmpty && UUIDv4
  */
-export function uuidV4CheckValidator(name: string, value: string): Validator {
+export function uuidV4CheckValidator(name: string, value?: string): Validator {
     const required = new NotEmptyValidator(name, value);
-    const r = new RegExpValidator(name, value, regexp.UUIDv4RegExp);
+    const r = new RegExpValidator(name, regexp.UUIDv4RegExp, value);
     return new CompositeValidator(required, r);
 }
 
@@ -73,7 +73,7 @@ export function numberRangeValidator(
     max: number,
 ): Validator {
     const required = new NotEmptyValidator(name, value);
-    const f = new RegExpValidator(name, value, regexp.NumberRegExp);
+    const f = new RegExpValidator(name, regexp.NumberRegExp, value);
     const range = new NumberRangeValidator(name, Number(value), min, max);
     return new CompositeValidator(required, f, range);
 }
