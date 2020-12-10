@@ -1,5 +1,5 @@
 import { HtmlColorRegExp } from '../src/regexp';
-import { formatValidator } from '../src/validator-factory';
+import { and, falseValidator, formatValidator } from '../src/validator-factory';
 
 describe('format: HtmlColorRegExp', () => {
     test.each`
@@ -21,12 +21,12 @@ describe('format: HtmlColorRegExp', () => {
         ${''}                         | ${{ isValid: false, expected: 'not empty' }}
     `('input: $value expected: $expected.isValid', ({ value, expected }) => {
         const name = 'htmlColor';
-        const suc = formatValidator({
+        const sut = formatValidator({
             name: 'htmlColor',
             value,
             format: HtmlColorRegExp,
         });
-        expect(suc.validate()).toEqual({
+        expect(sut.validate()).toEqual({
             isValid: expected.isValid,
             report: {
                 actual: value,
@@ -36,4 +36,63 @@ describe('format: HtmlColorRegExp', () => {
             },
         });
     });
+});
+
+describe('falseValidator and falseValidator', () => {
+    test.each`
+        value1 | value2 | expected
+        ${{ name: 'string', value: '' }} | ${{ name: 'number', value: 0 }} | ${{
+    isValid: true,
+    actual: 'falsy',
+    name: 'number',
+    rawValue: '0',
+}}
+        ${{ name: 'string', value: null }} | ${{ name: 'string', value: undefined }} | ${{
+    isValid: true,
+    actual: 'falsy',
+    name: 'string',
+    rawValue: 'undefined',
+}}
+        ${{ name: 'number', value: NaN }} | ${{ name: 'number', value: null }} | ${{
+    isValid: true,
+    actual: 'falsy',
+    name: 'number',
+    rawValue: 'null',
+}}
+        ${{ name: 'boolean', value: false }} | ${{ name: 'boolean', value: undefined }} | ${{
+    isValid: true,
+    actual: 'falsy',
+    name: 'boolean',
+    rawValue: 'undefined',
+}}
+        ${{ name: 'string', value: null }} | ${{ name: 'object', value: {} }} | ${{
+    isValid: false,
+    actual: 'truthy',
+    name: 'object',
+    rawValue: '[object Object]',
+}}
+        ${{ name: 'array', value: [] }} | ${{ name: 'string', value: 'a' }} | ${{
+    isValid: false,
+    actual: 'truthy',
+    name: 'array',
+    rawValue: '',
+}}
+    `(
+        'input: $value1 $value2 expected: $expected.isValid',
+        ({ value1, value2, expected }) => {
+            const sut = and(
+                falseValidator(value1.name, value1.value),
+                falseValidator(value2.name, value2.value),
+            );
+            expect(sut.validate()).toEqual({
+                isValid: expected.isValid,
+                report: {
+                    actual: expected.actual,
+                    attribute: expected.name,
+                    expected: 'falsy',
+                    rawValue: expected.rawValue,
+                },
+            });
+        },
+    );
 });

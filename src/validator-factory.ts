@@ -1,6 +1,7 @@
 import {
     CompositeValidator,
     ContainsValidator,
+    FalseValidator,
     ISODateTimeValidator,
     LiteralTypeCheckValidator,
     MaxLengthValidator,
@@ -164,6 +165,15 @@ export function numberFormatValidator(
  */
 export function emptyStringValidator(name: string, value: string): Validator {
     return literalCheckValidator(name, value, '');
+}
+
+/**
+ * false validator
+ * @param name name
+ * @param value value
+ */
+export function falseValidator(name: string, value?: any): Validator {
+    return new FalseValidator(name, value);
 }
 
 /**

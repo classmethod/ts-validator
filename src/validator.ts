@@ -17,6 +17,35 @@ export interface Validator {
 }
 
 /**
+ * Boolean: false validator
+ */
+export class FalseValidator implements Validator {
+    readonly name: string;
+    readonly value?: any;
+
+    constructor(name: string, value?: any) {
+        this.name = name;
+        this.value = value;
+    }
+
+    validate(): ValidationResult {
+        const isValid = !this.value;
+
+        const report: Report = {
+            rawValue: String(this.value),
+            attribute: this.name,
+            expected: 'falsy',
+            actual: isValid ? 'falsy' : 'truthy',
+        };
+
+        return {
+            isValid,
+            report,
+        };
+    }
+}
+
+/**
  * not ( undefined, null, '')
  */
 export class NotEmptyValidator implements Validator {
@@ -152,6 +181,7 @@ export class DateTimeValidator implements Validator {
             report,
         };
     }
+
     private static getDateTime(value: string, dateFormat: string): DateTime {
         return DateTime.fromFormat(value, dateFormat);
     }
