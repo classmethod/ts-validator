@@ -53,6 +53,9 @@
 			<a href="classes/datetimevalidator.html" class="tsd-kind-icon">Date<wbr>Time<wbr>Validator</a>
 		</li>
 		<li class=" tsd-kind-class">
+			<a href="classes/falsevalidator.html" class="tsd-kind-icon">False<wbr>Validator</a>
+		</li>
+		<li class=" tsd-kind-class">
 			<a href="classes/isodatetimevalidator.html" class="tsd-kind-icon">ISODate<wbr>Time<wbr>Validator</a>
 		</li>
 		<li class=" tsd-kind-class">
@@ -120,6 +123,9 @@
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="globals.html#emptystringvalidator" class="tsd-kind-icon">empty<wbr>String<wbr>Validator</a>
+		</li>
+		<li class=" tsd-kind-function">
+			<a href="globals.html#falsevalidator" class="tsd-kind-icon">false<wbr>Validator</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="globals.html#formatvalidator" class="tsd-kind-icon">format<wbr>Validator</a>
@@ -379,6 +385,7 @@
 							<li class="tsd-kind-class"><a href="classes/compositevalidator.html" class="tsd-kind-icon">Composite<wbr>Validator</a></li>
 							<li class="tsd-kind-class"><a href="classes/containsvalidator.html" class="tsd-kind-icon">Contains<wbr>Validator</a></li>
 							<li class="tsd-kind-class"><a href="classes/datetimevalidator.html" class="tsd-kind-icon">Date<wbr>Time<wbr>Validator</a></li>
+							<li class="tsd-kind-class"><a href="classes/falsevalidator.html" class="tsd-kind-icon">False<wbr>Validator</a></li>
 							<li class="tsd-kind-class"><a href="classes/isodatetimevalidator.html" class="tsd-kind-icon">ISODate<wbr>Time<wbr>Validator</a></li>
 							<li class="tsd-kind-class"><a href="classes/literaltypecheckvalidator.html" class="tsd-kind-icon">Literal<wbr>Type<wbr>Check<wbr>Validator</a></li>
 							<li class="tsd-kind-class"><a href="classes/maxlengthvalidator.html" class="tsd-kind-icon">Max<wbr>Length<wbr>Validator</a></li>
@@ -422,6 +429,7 @@
 							<li class="tsd-kind-function"><a href="globals.html#and" class="tsd-kind-icon">and</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#containsvalidator" class="tsd-kind-icon">contains<wbr>Validator</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#emptystringvalidator" class="tsd-kind-icon">empty<wbr>String<wbr>Validator</a></li>
+							<li class="tsd-kind-function"><a href="globals.html#falsevalidator" class="tsd-kind-icon">false<wbr>Validator</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#formatvalidator" class="tsd-kind-icon">format<wbr>Validator</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#isodatevalidator" class="tsd-kind-icon">iso<wbr>Date<wbr>Validator</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#lengthvalidator" class="tsd-kind-icon">length<wbr>Validator</a></li>
@@ -444,7 +452,7 @@
 				<div class="tsd-signature tsd-kind-icon">Report<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>actual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>attribute<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>expected<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>rawValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator.ts#L8">validator.ts:8</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator.ts#L8">validator.ts:8</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -471,7 +479,7 @@
 				<div class="tsd-signature tsd-kind-icon">Validation<wbr>Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>isValid<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>report<span class="tsd-signature-symbol">: </span><a href="globals.html#report" class="tsd-signature-type">Report</a><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator.ts#L3">validator.ts:3</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator.ts#L3">validator.ts:3</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -495,7 +503,7 @@
 				<div class="tsd-signature tsd-kind-icon">Alphanumeric<wbr>Lower<wbr>Req<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[0-9a-z]*$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L31">regexp.ts:31</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L31">regexp.ts:31</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -510,7 +518,7 @@
 				<div class="tsd-signature tsd-kind-icon">Alphanumeric<wbr>Req<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[a-zA-Z0-9]*$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L21">regexp.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L21">regexp.ts:21</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -525,7 +533,7 @@
 				<div class="tsd-signature tsd-kind-icon">Ascii<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[\\u0020-\\u007E]+$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L36">regexp.ts:36</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L36">regexp.ts:36</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -540,7 +548,7 @@
 				<div class="tsd-signature tsd-kind-icon">Cfn<wbr>Stack<wbr>Name<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[A-Za-z][A-Za-z0-9-]*$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L11">regexp.ts:11</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L11">regexp.ts:11</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -555,7 +563,7 @@
 				<div class="tsd-signature tsd-kind-icon">Html<wbr>Color<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = /(#(?:[0-9a-f]{2}){2,4}$|(#[0-9a-f]{3}$)|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d.]+%?\)$|black$|silver$|gray$|whitesmoke$|maroon$|red$|purple$|fuchsia$|green$|lime$|olivedrab$|yellow$|navy$|blue$|teal$|aquamarine$|orange$|aliceblue$|antiquewhite$|aqua$|azure$|beige$|bisque$|blanchedalmond$|blueviolet$|brown$|burlywood$|cadetblue$|chartreuse$|chocolate$|coral$|cornflowerblue$|cornsilk$|crimson$|currentcolor$|darkblue$|darkcyan$|darkgoldenrod$|darkgray$|darkgreen$|darkgrey$|darkkhaki$|darkmagenta$|darkolivegreen$|darkorange$|darkorchid$|darkred$|darksalmon$|darkseagreen$|darkslateblue$|darkslategray$|darkslategrey$|darkturquoise$|darkviolet$|deeppink$|deepskyblue$|dimgray$|dimgrey$|dodgerblue$|firebrick$|floralwhite$|forestgreen$|gainsboro$|ghostwhite$|goldenrod$|gold$|greenyellow$|grey$|honeydew$|hotpink$|indianred$|indigo$|ivory$|khaki$|lavenderblush$|lavender$|lawngreen$|lemonchiffon$|lightblue$|lightcoral$|lightcyan$|lightgoldenrodyellow$|lightgray$|lightgreen$|lightgrey$|lightpink$|lightsalmon$|lightseagreen$|lightskyblue$|lightslategray$|lightslategrey$|lightsteelblue$|lightyellow$|limegreen$|linen$|mediumaquamarine$|mediumblue$|mediumorchid$|mediumpurple$|mediumseagreen$|mediumslateblue$|mediumspringgreen$|mediumturquoise$|mediumvioletred$|midnightblue$|mintcream$|mistyrose$|moccasin$|navajowhite$|oldlace$|olive$|orangered$|orchid$|palegoldenrod$|palegreen$|paleturquoise$|palevioletred$|papayawhip$|peachpuff$|peru$|pink$|plum$|powderblue$|rosybrown$|royalblue$|saddlebrown$|salmon$|sandybrown$|seagreen$|seashell$|sienna$|skyblue$|slateblue$|slategray$|slategrey$|snow$|springgreen$|steelblue$|tan$|thistle$|tomato$|transparent$|turquoise$|violet$|wheat$|white$|yellowgreen$|rebeccapurple$)/i</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L41">regexp.ts:41</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L41">regexp.ts:41</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -570,7 +578,7 @@
 				<div class="tsd-signature tsd-kind-icon">Number<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[0-9]+$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L16">regexp.ts:16</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L16">regexp.ts:16</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -585,7 +593,7 @@
 				<div class="tsd-signature tsd-kind-icon">UUIDv4<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}&#x27;,)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L4">regexp.ts:4</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L4">regexp.ts:4</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -600,7 +608,7 @@
 				<div class="tsd-signature tsd-kind-icon">Utf8<wbr>Zenkaku<wbr>And<wbr>Return<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = new RegExp(&#x27;^[^ -~｡-ﾟ]+$&#x27;)</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/regexp.ts#L26">regexp.ts:26</a></li>
+						<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/regexp.ts#L26">regexp.ts:26</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -622,7 +630,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L129">validator-factory.ts:129</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L130">validator-factory.ts:130</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -659,7 +667,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L172">validator-factory.ts:172</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L182">validator-factory.ts:182</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -687,7 +695,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L98">validator-factory.ts:98</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L99">validator-factory.ts:99</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -721,7 +729,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L165">validator-factory.ts:165</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L166">validator-factory.ts:166</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -743,6 +751,43 @@
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function">
+				<a name="falsevalidator" class="tsd-anchor"></a>
+				<h3>false<wbr>Validator</h3>
+				<ul class="tsd-signatures tsd-kind-function">
+					<li class="tsd-signature tsd-kind-icon">false<wbr>Validator<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/validator.html" class="tsd-signature-type">Validator</a></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L175">validator-factory.ts:175</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>false validator</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>name: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>name</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">any</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>value</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="interfaces/validator.html" class="tsd-signature-type">Validator</a></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function">
 				<a name="formatvalidator" class="tsd-anchor"></a>
 				<h3>format<wbr>Validator</h3>
 				<ul class="tsd-signatures tsd-kind-function">
@@ -752,7 +797,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L24">validator-factory.ts:24</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L25">validator-factory.ts:25</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -805,7 +850,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L122">validator-factory.ts:122</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L123">validator-factory.ts:123</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -836,7 +881,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L83">validator-factory.ts:83</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L84">validator-factory.ts:84</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -873,7 +918,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L111">validator-factory.ts:111</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L112">validator-factory.ts:112</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -907,7 +952,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L52">validator-factory.ts:52</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L53">validator-factory.ts:53</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -938,7 +983,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L147">validator-factory.ts:147</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L148">validator-factory.ts:148</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -975,7 +1020,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L68">validator-factory.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L69">validator-factory.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1012,7 +1057,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L179">validator-factory.ts:179</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L189">validator-factory.ts:189</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1040,7 +1085,7 @@
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/ade0484/src/validator-factory.ts#L59">validator-factory.ts:59</a></li>
+								<li>Defined in <a href="https://github.com/cm-madlabs/ts-validator/blob/9389950/src/validator-factory.ts#L60">validator-factory.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
